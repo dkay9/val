@@ -30,7 +30,6 @@
       padding: 16px;
     }
 
-    /* FULL-SCREEN CONFETTI CANVAS */
     #confettiCanvas {
       position: fixed;
       inset: 0;
@@ -122,6 +121,99 @@
       display: block;
     }
 
+    /* Celebration screen styles */
+    .celebration {
+      display: none;
+      text-align: center;
+      animation: pop .35s ease;
+    }
+
+    .celebration-gif {
+      width: min(400px, 90vw);
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+
+    .love-message {
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.6;
+      margin: 20px auto;
+      max-width: 600px;
+      color: #333;
+    }
+
+    /* Slideshow styles */
+    .slideshow {
+      display: none;
+      animation: pop .35s ease;
+    }
+
+    .slideshow h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      margin: 10px 0 20px;
+      color: #ff3b7a;
+    }
+
+    .slide-container {
+      position: relative;
+      margin: 20px auto;
+    }
+
+    .slide-image {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .slide-caption {
+      font-size: clamp(16px, 2.5vw, 20px);
+      margin: 15px 0 5px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .slide-counter {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .slide-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .slide-nav button {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      background: var(--yes);
+      color: white;
+      padding: 12px 30px;
+      font-size: 16px;
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .slide-nav button:hover {
+      background: var(--yesHover);
+      transform: scale(1.05);
+    }
+
+    .final-message {
+      margin-top: 25px;
+      font-size: clamp(20px, 3.5vw, 28px);
+      color: #ff3b7a;
+      font-weight: 700;
+    }
+
     @keyframes pop {
       from { transform: scale(.96); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
@@ -133,69 +225,119 @@
   <canvas id="confettiCanvas"></canvas>
 
   <main class="card">
-    <!-- ANIMAL WITH HEART -->
-    <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="fur" x1="0" x2="1">
-          <stop offset="0" stop-color="#f7c7a1"/>
-          <stop offset="1" stop-color="#f2a97b"/>
-        </linearGradient>
-        <linearGradient id="heart" x1="0" x2="1">
-          <stop offset="0" stop-color="#ff4d7d"/>
-          <stop offset="1" stop-color="#ff1f68"/>
-        </linearGradient>
-      </defs>
+    <!-- INITIAL QUESTION -->
+    <div id="question">
+      <svg class="art" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fur" x1="0" x2="1">
+            <stop offset="0" stop-color="#f7c7a1"/>
+            <stop offset="1" stop-color="#f2a97b"/>
+          </linearGradient>
+          <linearGradient id="heart" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff4d7d"/>
+            <stop offset="1" stop-color="#ff1f68"/>
+          </linearGradient>
+        </defs>
 
-      <path d="M250 50 C250 33 270 25 282 38
-               C294 25 314 33 314 50
-               C314 78 282 92 282 106
-               C282 92 250 78 250 50Z"
-            fill="url(#heart)"/>
+        <path d="M250 50 C250 33 270 25 282 38
+                 C294 25 314 33 314 50
+                 C314 78 282 92 282 106
+                 C282 92 250 78 250 50Z"
+              fill="url(#heart)"/>
 
-      <path d="M90 120 C90 70 140 40 190 60
-               C240 40 290 70 290 120
-               C290 180 240 210 190 210
-               C140 210 90 180 90 120Z"
-            fill="url(#fur)"/>
+        <path d="M90 120 C90 70 140 40 190 60
+                 C240 40 290 70 290 120
+                 C290 180 240 210 190 210
+                 C140 210 90 180 90 120Z"
+              fill="url(#fur)"/>
 
-      <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
-      <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
+        <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
+        <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
 
-      <circle cx="160" cy="130" r="8"/>
-      <circle cx="220" cy="130" r="8"/>
+        <circle cx="160" cy="130" r="8"/>
+        <circle cx="220" cy="130" r="8"/>
 
-      <path d="M190 144 C186 144 182 148 182 152
-               C182 160 190 164 190 170
-               C190 164 198 160 198 152
-               C198 148 194 144 190 144Z"
-            fill="#ff7aa2"/>
-    </svg>
+        <path d="M190 144 C186 144 182 148 182 152
+                 C182 160 190 164 190 170
+                 C190 164 198 160 198 152
+                 C198 148 194 144 190 144Z"
+              fill="#ff7aa2"/>
+      </svg>
 
-    <h1>nirali will you be my valentine?</h1>
+      <h1>Will you be my Valentine? My udara💕</h1>
 
-    <section class="button-zone" id="zone">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
+      <section class="button-zone" id="zone">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+      </section>
+
+      <div class="hint" id="hint">"No" seems a bit shy 😈</div>
+    </div>
+
+    <!-- CELEBRATION SCREEN -->
+    <section class="celebration" id="celebration">
+      <h2>Yay! 🎉💕✨</h2>
+      <img 
+        class="celebration-gif"
+        src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+        alt="Celebration"
+      />
+      <p class="love-message">
+        Many daughters have done virtuously, but you excel them all.
+        You are God's perfect gift to me, and I thank Him for you every day.
+        I can't wait to spend this Valentine's Day and many more loving you.
+        Here are some of my favorite memories with you...
+      </p>
     </section>
 
-    <!-- HINT -->
-    <div class="hint" id="hint">“No” seems a bit shy 😈</div>
+    <!-- SLIDESHOW -->
+    <section class="slideshow" id="slideshow">
+      <h2>Our Beautiful Memories 💕</h2>
+      
+      <div class="slide-container">
+        <img id="slideImage" class="slide-image" src="" alt="Memory">
+        <p id="slideCaption" class="slide-caption"></p>
+        <p id="slideCounter" class="slide-counter"></p>
+      </div>
 
-    <section class="result" id="result">
-      <h2>YAY! 🎉</h2>
-      <img
-        class="fireworks"
-        src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-        alt="Fireworks"
-      />
+      <div class="slide-nav">
+        <button id="prevBtn">← Previous</button>
+        <button id="nextBtn">Next →</button>
+      </div>
+
+      <p class="final-message">Happy Valentine's Day, my udara! ❤️</p>
     </section>
   </main>
 
   <script>
+    // Photo memories - CUSTOMIZE THESE!
+    const memories = [
+      {
+        image: 'images/image1.jpeg',
+        caption: 'Bruhhh what where we doing here? 😂'
+      },
+      {
+        image: 'images/image5.jpeg',
+        caption: 'Anyone who sees me will immediately tell I just fell in love with you!'
+      },
+      {
+        image: 'images/image3.jpeg',
+        caption: 'Our first movie date!'
+      },
+      {
+        image: 'images/image4.jpeg',
+        caption: 'Our first picture together!! Such an awkward moment lol'
+      }
+    ];
+
+    let currentSlide = 0;
+
     const zone = document.getElementById("zone");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
-    const result = document.getElementById("result");
+    const question = document.getElementById("question");
+    const celebration = document.getElementById("celebration");
+    const slideshow = document.getElementById("slideshow");
     const hint = document.getElementById("hint");
 
     /* ---------- CONFETTI ---------- */
@@ -291,15 +433,36 @@
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
-      zone.style.display = "none";
-      hint.style.display = "none";     // HIDE THE HINT
-      result.style.display = "block";
+      question.style.display = "none";
+      celebration.style.display = "block";
       resizeConfettiCanvas();
       fullScreenConfetti();
+
+      // Show slideshow after 5 seconds
+      setTimeout(() => {
+        celebration.style.display = "none";
+        slideshow.style.display = "block";
+        showSlide(0);
+      }, 5000);
+    });
+
+    /* ---------- SLIDESHOW ---------- */
+    function showSlide(index) {
+      currentSlide = index;
+      document.getElementById('slideImage').src = memories[index].image;
+      document.getElementById('slideCaption').textContent = memories[index].caption;
+      document.getElementById('slideCounter').textContent = `${index + 1} of ${memories.length}`;
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentSlide = (currentSlide + 1) % memories.length;
+      showSlide(currentSlide);
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentSlide = (currentSlide - 1 + memories.length) % memories.length;
+      showSlide(currentSlide);
     });
   </script>
 </body>
 </html>
-
-
-
